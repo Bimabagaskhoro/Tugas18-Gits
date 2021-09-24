@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">UiGitsTugas18</string>
+    <string name="home">HOME</string>
+    <string name="nama_buah">Nama Buah</string>
+    <string name="add">ADD</string>
+    <string name="harga">harga</string>
+    <string name="id">id</string>
+    <string name="simpan">simpan</string>
+    <string name="update">UPDATE</string>
+    <string name="detail">DETAIL</string>
+</resources>
