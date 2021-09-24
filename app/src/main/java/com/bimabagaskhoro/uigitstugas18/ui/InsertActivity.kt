@@ -5,9 +5,8 @@ import android.os.Bundle
 import android.widget.EditText
 import android.widget.Toast
 import com.bimabagaskhoro.uigitstugas18.R
-import com.bimabagaskhoro.uigitstugas18.databinding.ActivityDetailBinding
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityInsertBinding
-import com.bimabagaskhoro.uigitstugas18.model.ResponseSukses
+import com.bimabagaskhoro.uigitstugas18.model.ResponseStatus
 import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
@@ -43,8 +42,8 @@ class InsertActivity : AppCompatActivity() {
                 edtName.text.toString().trim(),
                 edtHarga.text.toString().trim(),
                 "insert_buah"
-        ).enqueue(object : Callback<ResponseSukses>{
-            override fun onResponse(call: Call<ResponseSukses>, response: Response<ResponseSukses>) {
+        ).enqueue(object : Callback<ResponseStatus>{
+            override fun onResponse(call: Call<ResponseStatus>, response: Response<ResponseStatus>) {
                 if (response.isSuccessful){
                     if (response.body()?.status == 1){
                         edtId.setText("")
@@ -54,7 +53,7 @@ class InsertActivity : AppCompatActivity() {
                 }
             }
 
-            override fun onFailure(call: Call<ResponseSukses>, t: Throwable) {
+            override fun onFailure(call: Call<ResponseStatus>, t: Throwable) {
                 Toast.makeText(this@InsertActivity, "Reponse Gagal : $t", Toast.LENGTH_LONG).show()
             }
 

@@ -66,6 +66,20 @@ class MainActivity : AppCompatActivity() {
     private fun show(data: ResponseData?){
         val result = data?.data
         itemAdapter.setShow(result as List<DataItem>)
-        //showLoading(true)
+        showLoading(false)
+    }
+
+    private fun showLoading(state: Boolean) {
+        if (state) {
+            binding.apply {
+                progressBar.visibility = View.VISIBLE
+                rvItem.visibility = View.INVISIBLE
+            }
+        } else {
+            binding.apply {
+                progressBar.visibility = View.INVISIBLE
+                rvItem.visibility = View.VISIBLE
+            }
+        }
     }
 }

@@ -3,12 +3,15 @@ package com.bimabagaskhoro.uigitstugas18.ui
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.ImageView
 import android.widget.TextView
 import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityDetailBinding
 import com.bimabagaskhoro.uigitstugas18.model.DataItem
+import com.bimabagaskhoro.uigitstugas18.model.ResponseStatus
+import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class DetailActivity : AppCompatActivity() {
 
@@ -34,18 +37,39 @@ class DetailActivity : AppCompatActivity() {
             }
 
             fabDelete.setOnClickListener {
+                deleteData()
             }
         }
+
+        val id = intent.getIntExtra("id",0)
         getDetail()
     }
 
     private fun getDetail() {
-        val tvName: TextView = findViewById(R.id.tv_nama_buah)
-        val tvPrice: TextView = findViewById(R.id.tv_harga)
+        val tvId: TextView = findViewById(R.id.tv_id_detail)
+        val tvName: TextView = findViewById(R.id.tv_nama_buah_detail)
+        val tvPrice: TextView = findViewById(R.id.tv_harga_detail)
 
         val item = intent.getParcelableExtra<DataItem>(EXTRA_DATA) as DataItem
-
+        tvId.text = item.id
         tvName.text = item.nama
         tvPrice.text = item.harga
+    }
+
+    private fun deleteData() {
+       /* RetrofitClient.apiInstance.deleteBuah()
+                .enqueue(object : Callback<ResponseStatus>{
+                    override fun onResponse(call: Call<ResponseStatus>, response: Response<ResponseStatus>) {
+                     if (response.isSuccessful){
+                         if (response.body()?.status == 1){
+                             (response.body())
+                         }
+                     }
+                    }
+
+                    override fun onFailure(call: Call<ResponseStatus>, t: Throwable) {
+                        TODO("Not yet implemented")
+                    }
+                })*/
     }
 }

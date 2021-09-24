@@ -32,6 +32,7 @@ class ItemAdapter (private val listItem: ArrayList<DataItem> ):
     inner class ItemViewHolder(private val binding: ItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: DataItem) {
             binding.apply {
+                tvId.text = item.id
                 tvName.text = item.nama
                 tvPrice.text = item.harga
                 itemView.setOnClickListener {
