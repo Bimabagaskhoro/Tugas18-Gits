@@ -37,7 +37,7 @@ class InsertActivity : AppCompatActivity() {
         val edtName:EditText = findViewById(R.id.edt_nama)
         val edtHarga:EditText = findViewById(R.id.edt_harga)
 
-        RetrofitClient.apiInstance.insertBuah(
+        RetrofitClient().apiInstance().insertBuah(
                 edtId.text.toString().trim(),
                 edtName.text.toString().trim(),
                 edtHarga.text.toString().trim(),

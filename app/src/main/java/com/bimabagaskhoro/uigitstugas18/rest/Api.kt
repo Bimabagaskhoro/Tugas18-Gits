@@ -10,11 +10,6 @@ interface Api {
     @GET("apibuah.php?function=get_buah")
     fun getBuah(): Call<ResponseData>
 
-    @GET("apibuah.php?function=get_buah")
-    fun getDetail(
-        @Path("id") id: Int
-    ): Call<ResponseData>
-
     @FormUrlEncoded
     @POST("apibuah.php?function=insert_buah")
     fun insertBuah(
@@ -24,8 +19,16 @@ interface Api {
             @Query("function")function: String
     ): Call<ResponseStatus>
 
+    @FormUrlEncoded
+    @POST("apibuah.php?function=update_buah")
+    fun updateBuah(
+            @Field("nama")nama: String,
+            @Field("harga")harga: String,
+            @Query("id")id: String
+    ): Call<ResponseStatus>
+
     @DELETE("apibuah.php?function=delete_buah")
     fun deleteBuah(
-            @Path("id")id:String
+            @Query("id")id: String,
     ):Call<ResponseStatus>
 }

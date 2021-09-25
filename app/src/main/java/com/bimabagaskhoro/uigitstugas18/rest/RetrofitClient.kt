@@ -1,28 +1,28 @@
 package com.bimabagaskhoro.uigitstugas18.rest
 
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-object RetrofitClient {
+class RetrofitClient {
 
-    private const val BASE_URL = "http://192.168.43.225/tugasGitsApi/"
-    private val okHttpClient = OkHttpClient.Builder()
-        .addInterceptor { chain ->
-            val original = chain.request()
-            val requestBuilder = original.newBuilder()
-                .method(original.method, original.body)
-            val request = requestBuilder.build()
-            chain.proceed(request)
-        }.build()
+    val BASE_URL = "http://192.168.43.225/tugasGitsApi/"
 
-    val apiInstance: Api by lazy{
-        val retrofit = Retrofit.Builder()
-            .baseUrl(BASE_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient)
-            .build()
-
-        retrofit.create(Api::class.java)
+    fun getInterceptor() : OkHttpClient {
+        val logging = HttpLoggingInterceptor()
+        logging.level = HttpLoggingInterceptor.Level.BODY
+        val okHttpClient = OkHttpClient.Builder()
+                .addInterceptor(logging)
+                .build()
+        return  okHttpClient
     }
+    fun getRetrofit() : Retrofit {
+        return Retrofit.Builder()
+                .baseUrl(BASE_URL)
+                .client(getInterceptor())
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+    }
+    fun apiInstance() = getRetrofit().create(Api::class.java)
 }

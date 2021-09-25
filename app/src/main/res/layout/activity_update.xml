@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".ui.UpdateActivity">
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tvfield2"
+        android:id="@+id/tvfield1"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,7 +16,26 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_nama"
+            android:id="@+id/edt_id_updated"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/id"
+            android:inputType="text|number"  />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvfield2"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@+id/tvfield1">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_nama_updated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -34,7 +53,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvfield2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_harga"
+            android:id="@+id/edt_harga_updated"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -42,6 +61,15 @@
             android:inputType="text|number" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/simpan"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvfield3" />
     <Button
         android:id="@+id/button_register"
         android:layout_width="wrap_content"

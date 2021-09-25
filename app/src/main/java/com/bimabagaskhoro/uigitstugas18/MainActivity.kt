@@ -1,5 +1,6 @@
 package com.bimabagaskhoro.uigitstugas18
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +13,7 @@ import com.bimabagaskhoro.uigitstugas18.adapter.ItemAdapter
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityMainBinding
 import com.bimabagaskhoro.uigitstugas18.model.DataItem
 import com.bimabagaskhoro.uigitstugas18.model.ResponseData
+import com.bimabagaskhoro.uigitstugas18.model.ResponseStatus
 import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
 import com.bimabagaskhoro.uigitstugas18.ui.InsertActivity
 import retrofit2.Call
@@ -44,7 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getData() {
-        RetrofitClient.apiInstance.getBuah()
+        RetrofitClient().apiInstance().getBuah()
                 .enqueue(object : Callback<ResponseData>{
                     override fun onResponse(
                         call: Call<ResponseData>,
@@ -61,6 +63,19 @@ class MainActivity : AppCompatActivity() {
                         Toast.makeText(this@MainActivity, "Reponse Gagal : $t", Toast.LENGTH_LONG).show()
                     }
 
+                })
+    }
+
+    fun deleteData(context: Context, id: String) {
+        RetrofitClient().apiInstance().deleteBuah(id)
+                .enqueue(object : Callback<ResponseStatus>{
+                    override fun onResponse(call: Call<ResponseStatus>, response: Response<ResponseStatus>) {
+                        Toast.makeText(context.applicationContext, "Berhasil $id", Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onFailure(call: Call<ResponseStatus>, t: Throwable) {
+                        Toast.makeText(this@MainActivity, "Reponse Gagal : $t", Toast.LENGTH_LONG).show()
+                    }
                 })
     }
     private fun show(data: ResponseData?){
