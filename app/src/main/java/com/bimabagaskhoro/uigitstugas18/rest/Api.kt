@@ -40,14 +40,25 @@ interface Api {
     @GET("apiperson.php?function=get_person")
     fun getPerson(): Call<ResponsePerson>
 
-    @FormUrlEncoded
+//    @FormUrlEncoded
+//    @POST("apiperson.php?function=insert_person")
+//    fun insertPerson(
+//        @Field("id")id: String,
+//        @Field("nama")nama: String,
+//        @Field("email")email: String,
+//        @Field("tittle")tittle: String,
+//        @Field("gambar")gambar: String,
+//        @Query("function")function: String
+//    ): Call<ResponseStatusPerson>
+
+    @Multipart
     @POST("apiperson.php?function=insert_person")
     fun insertPerson(
-        @Field("id")id: String,
-        @Field("nama")nama: String,
-        @Field("email")email: String,
-        @Field("tittle")tittle: String,
-        @Field("gambar")gambar: String,
+        @Query("id")id: String,
+        @Query("nama")nama: String,
+        @Query("email")email: String,
+        @Query("tittle")tittle: String,
+        @Part("gambar")gambar:  MultipartBody.Part,
         @Query("function")function: String
     ): Call<ResponseStatusPerson>
 
