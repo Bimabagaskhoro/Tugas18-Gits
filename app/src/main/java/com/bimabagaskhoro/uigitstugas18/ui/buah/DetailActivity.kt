@@ -1,18 +1,11 @@
-package com.bimabagaskhoro.uigitstugas18.ui
+package com.bimabagaskhoro.uigitstugas18.ui.buah
 
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
-import android.widget.Toast
 import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityDetailBinding
-import com.bimabagaskhoro.uigitstugas18.model.DataItem
-import com.bimabagaskhoro.uigitstugas18.model.ResponseStatus
-import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import com.bimabagaskhoro.uigitstugas18.model.buah.DataItem
 
 class DetailActivity : AppCompatActivity() {
 

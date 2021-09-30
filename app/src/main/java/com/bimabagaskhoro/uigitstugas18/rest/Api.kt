@@ -1,8 +1,11 @@
 package com.bimabagaskhoro.uigitstugas18.rest
 
-import com.bimabagaskhoro.uigitstugas18.model.DataItem
-import com.bimabagaskhoro.uigitstugas18.model.ResponseData
-import com.bimabagaskhoro.uigitstugas18.model.ResponseStatus
+import com.bimabagaskhoro.uigitstugas18.model.ResponseGambar
+import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseData
+import com.bimabagaskhoro.uigitstugas18.model.person.ResponsePerson
+import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseStatus
+import com.bimabagaskhoro.uigitstugas18.model.person.ResponseStatusPerson
+import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -31,4 +34,41 @@ interface Api {
     fun deleteBuah(
             @Query("id")id: String,
     ):Call<ResponseStatus>
+
+    //person
+
+    @GET("apiperson.php?function=get_person")
+    fun getPerson(): Call<ResponsePerson>
+
+    @FormUrlEncoded
+    @POST("apiperson.php?function=insert_person")
+    fun insertPerson(
+        @Field("id")id: String,
+        @Field("nama")nama: String,
+        @Field("email")email: String,
+        @Field("tittle")tittle: String,
+        @Field("gambar")gambar: String,
+        @Query("function")function: String
+    ): Call<ResponseStatusPerson>
+
+    @FormUrlEncoded
+    @POST("apiperson.php?function=update_person")
+    fun updatePerson(
+        @Field("nama")nama: String,
+        @Field("email")email: String,
+        @Field("tittle")tittle: String,
+        @Field("gambar")gambar: String,
+        @Query("id")id: String
+    ): Call<ResponseStatusPerson>
+
+    @DELETE("apiperson.php?function=delete_person")
+    fun deletePerson(
+            @Query("id")id: String,
+    ):Call<ResponseStatusPerson>
+
+    @Multipart
+    @POST("?function=insert_gambar")
+    fun insertGambar(
+            @Part body: MultipartBody.Part
+    ):Call<ResponseGambar>
 }

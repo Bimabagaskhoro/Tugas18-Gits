@@ -12,10 +12,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UiGitsTugas18"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.UpdateActivity"></activity>
-        <activity android:name=".ui.DetailActivity" />
-        <activity android:name=".ui.InsertActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".UpdatePersonActivity"></activity>
+        <activity android:name=".ui.person.InsertPersonActivity" />
+        <activity android:name=".ui.person.DetailPersonActivity" />
+        <activity android:name=".PersonActivity" />
+        <activity android:name=".ui.buah.BuahActivity" />
+        <activity android:name=".ui.buah.UpdateActivity" />
+        <activity android:name=".ui.buah.DetailActivity" />
+        <activity android:name=".ui.buah.InsertActivity" />
+        <activity android:name=".MainActivity" />
+        <activity android:name=".ui.RegisterActivity" />
+        <activity android:name=".ui.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

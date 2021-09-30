@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.buah.DetailActivity">
+    android:layout_height="match_parent">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
@@ -20,8 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <ImageView
+                android:id="@+id/img_detail_person"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:src="@drawable/ic_baseline_person_24"
+                app:layout_constraintBottom_toTopOf="@+id/tv_name_detail_person"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <TextView
-                android:id="@+id/tv_id_detail"
+                android:id="@+id/tv_id_detail_person"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
@@ -31,7 +40,7 @@
                 tools:text="1" />
 
             <TextView
-                android:id="@+id/tv_nama_buah_detail"
+                android:id="@+id/tv_name_detail_person"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="16dp"
@@ -40,21 +49,21 @@
                 android:textColor="@color/black"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/img_detail_person"
+                app:layout_constraintStart_toStartOf="@+id/img_detail_person"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/tv_harga_detail"
+                android:id="@+id/tv_email_detail_person"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/harga"
                 android:textSize="16sp"
                 android:textStyle="italic"
-                app:layout_constraintEnd_toEndOf="@+id/tv_nama_buah_detail"
-                app:layout_constraintStart_toStartOf="@+id/tv_nama_buah_detail"
-                app:layout_constraintTop_toBottomOf="@+id/tv_nama_buah_detail" />
+                app:layout_constraintEnd_toEndOf="@+id/tv_name_detail_person"
+                app:layout_constraintStart_toStartOf="@+id/tv_name_detail_person"
+                app:layout_constraintTop_toBottomOf="@+id/tv_name_detail_person" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

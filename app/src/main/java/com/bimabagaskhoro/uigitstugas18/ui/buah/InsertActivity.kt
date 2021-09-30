@@ -1,4 +1,4 @@
-package com.bimabagaskhoro.uigitstugas18.ui
+package com.bimabagaskhoro.uigitstugas18.ui.buah
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,7 +6,7 @@ import android.widget.EditText
 import android.widget.Toast
 import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityInsertBinding
-import com.bimabagaskhoro.uigitstugas18.model.ResponseStatus
+import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseStatus
 import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
 import retrofit2.Call
 import retrofit2.Callback
