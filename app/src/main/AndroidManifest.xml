@@ -15,10 +15,10 @@
         android:theme="@style/Theme.UiGitsTugas18"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".UpdatePersonActivity"/>
+        <activity android:name=".ui.person.UpdatePersonActivity"/>
         <activity android:name=".ui.person.InsertPersonActivity" />
         <activity android:name=".ui.person.DetailPersonActivity" />
-        <activity android:name=".PersonActivity" />
+        <activity android:name=".ui.person.PersonActivity" />
         <activity android:name=".ui.buah.BuahActivity" />
         <activity android:name=".ui.buah.UpdateActivity" />
         <activity android:name=".ui.buah.DetailActivity" />

@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.bimabagaskhoro.uigitstugas18.PersonActivity
-import com.bimabagaskhoro.uigitstugas18.UpdatePersonActivity
+import com.bimabagaskhoro.uigitstugas18.ui.person.PersonActivity
+import com.bimabagaskhoro.uigitstugas18.ui.person.UpdatePersonActivity
 import com.bimabagaskhoro.uigitstugas18.ui.person.DetailPersonActivity
 import com.bimabagaskhoro.uigitstugas18.databinding.ItemPersonBinding
 import com.bimabagaskhoro.uigitstugas18.model.person.DataItemPerson

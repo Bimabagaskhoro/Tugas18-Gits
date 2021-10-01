@@ -1,4 +1,4 @@
-package com.bimabagaskhoro.uigitstugas18
+package com.bimabagaskhoro.uigitstugas18.ui.person
 
 import android.app.Activity
 import android.content.ContentValues
@@ -10,16 +10,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import com.bimabagaskhoro.uigitstugas18.databinding.ActivityUpdateBinding
+import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityUpdatePersonBinding
 import com.bimabagaskhoro.uigitstugas18.model.ResponseGambar
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponseStatusPerson
 import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
-import com.bimabagaskhoro.uigitstugas18.ui.person.InsertPersonActivity
-import com.bumptech.glide.Glide
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody

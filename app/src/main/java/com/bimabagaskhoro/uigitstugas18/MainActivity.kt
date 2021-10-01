@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityMainBinding
 import com.bimabagaskhoro.uigitstugas18.ui.buah.BuahActivity
+import com.bimabagaskhoro.uigitstugas18.ui.person.PersonActivity
 
 @Suppress("UNCHECKED_CAST")
 class MainActivity : AppCompatActivity() {

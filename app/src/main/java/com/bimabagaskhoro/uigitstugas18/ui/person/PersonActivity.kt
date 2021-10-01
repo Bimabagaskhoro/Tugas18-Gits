@@ -1,4 +1,4 @@
-package com.bimabagaskhoro.uigitstugas18
+package com.bimabagaskhoro.uigitstugas18.ui.person
 
 import android.content.Context
 import android.content.Intent
@@ -7,14 +7,13 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.adapter.PersonAdapter
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityPersonBinding
-import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseStatus
 import com.bimabagaskhoro.uigitstugas18.model.person.DataItemPerson
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponsePerson
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponseStatusPerson
 import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
-import com.bimabagaskhoro.uigitstugas18.ui.person.InsertPersonActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
