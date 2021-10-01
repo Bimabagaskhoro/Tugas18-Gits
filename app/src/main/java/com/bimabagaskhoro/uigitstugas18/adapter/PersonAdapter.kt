@@ -10,9 +10,15 @@ import com.bimabagaskhoro.uigitstugas18.UpdatePersonActivity
 import com.bimabagaskhoro.uigitstugas18.ui.person.DetailPersonActivity
 import com.bimabagaskhoro.uigitstugas18.databinding.ItemPersonBinding
 import com.bimabagaskhoro.uigitstugas18.model.person.DataItemPerson
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 
 class PersonAdapter(private val listItem: ArrayList<DataItemPerson> ):
     RecyclerView.Adapter<PersonAdapter.PersonViewHolder>(){
+    companion object {
+        const val EXTRA_LINK = "http://192.168.43.225/tugasGitsApi/uploadgambar/"
+    }
+
     fun setShow(data: List<DataItemPerson>) {
         listItem.clear()
         listItem.addAll(data)
@@ -37,6 +43,10 @@ class PersonAdapter(private val listItem: ArrayList<DataItemPerson> ):
                 tvNamePerson.text = item.nama
                 tvEmailPerson.text = item.email
                 tvTittle.text = item.tittle
+                Glide.with(itemView)
+                        .load(EXTRA_LINK + item.gambar)
+                        .apply(RequestOptions().override(55, 55))
+                        .into(imgPerson)
                 itemView.setOnClickListener {
                     val moveDetailPerson = Intent(itemView.context, DetailPersonActivity::class.java)
                     moveDetailPerson.putExtra(DetailPersonActivity.EXTRA_PERSON,item)

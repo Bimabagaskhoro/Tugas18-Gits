@@ -35,6 +35,7 @@ class ItemAdapter (private val listItem: ArrayList<DataItem> ):
                 tvId.text = item.id
                 tvName.text = item.nama
                 tvPrice.text = item.harga
+
                 itemView.setOnClickListener {
                     val moveDetail = Intent(itemView.context, DetailActivity::class.java)
                     moveDetail.putExtra(DetailActivity.EXTRA_DATA,item)

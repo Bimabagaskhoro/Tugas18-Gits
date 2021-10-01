@@ -9,9 +9,7 @@ data class ResponseGambar(
         @field:SerializedName("message")
         val message: String? = null,
 
-        @field:SerializedName("message")
+        @field:SerializedName("status")
         val status: Int? = null,
 
-        @field:SerializedName("file path")
-        val file_path: String? = null
 ): Parcelable

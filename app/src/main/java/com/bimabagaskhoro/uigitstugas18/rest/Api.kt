@@ -4,6 +4,7 @@ import com.bimabagaskhoro.uigitstugas18.model.ResponseGambar
 import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseData
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponsePerson
 import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseStatus
+import com.bimabagaskhoro.uigitstugas18.model.login.ResponseLogin
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponseStatusPerson
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -40,26 +41,15 @@ interface Api {
     @GET("apiperson.php?function=get_person")
     fun getPerson(): Call<ResponsePerson>
 
-//    @FormUrlEncoded
-//    @POST("apiperson.php?function=insert_person")
-//    fun insertPerson(
-//        @Field("id")id: String,
-//        @Field("nama")nama: String,
-//        @Field("email")email: String,
-//        @Field("tittle")tittle: String,
-//        @Field("gambar")gambar: String,
-//        @Query("function")function: String
-//    ): Call<ResponseStatusPerson>
-
-    @Multipart
+    @FormUrlEncoded
     @POST("apiperson.php?function=insert_person")
     fun insertPerson(
-        @Query("id")id: String,
-        @Query("nama")nama: String,
-        @Query("email")email: String,
-        @Query("tittle")tittle: String,
-        @Part("gambar")gambar:  MultipartBody.Part,
-        @Query("function")function: String
+        @Field("id") id: String,
+        @Field("nama") nama: String,
+        @Field("email") email: String,
+        @Field("tittle") tittle: String,
+        @Field("gambar") gambar: String,
+        @Query("function") function: String
     ): Call<ResponseStatusPerson>
 
     @FormUrlEncoded
@@ -78,8 +68,27 @@ interface Api {
     ):Call<ResponseStatusPerson>
 
     @Multipart
-    @POST("?function=insert_gambar")
+    @POST("apiperson.php?function=upload_gambar")
     fun insertGambar(
+            @Part body: MultipartBody.Part
+    ):Call<ResponseGambar>
+
+    //login
+
+    @FormUrlEncoded
+    @POST("apilogin.php?function=insert_user")
+    fun regist(
+            @Field("id") id: String,
+            @Field("nama") nama: String,
+            @Field("email") email: String,
+            @Field("passwd") tittle: String,
+            @Field("avatar") gambar: String,
+            @Query("function") function: String
+    ): Call<ResponseLogin>
+
+    @Multipart
+    @POST("apilogin.php?function=upload_avatar")
+    fun uploadImage(
             @Part body: MultipartBody.Part
     ):Call<ResponseGambar>
 }
