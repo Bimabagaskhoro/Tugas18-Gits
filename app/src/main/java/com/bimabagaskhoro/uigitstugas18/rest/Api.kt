@@ -4,7 +4,8 @@ import com.bimabagaskhoro.uigitstugas18.model.ResponseGambar
 import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseData
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponsePerson
 import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseStatus
-import com.bimabagaskhoro.uigitstugas18.model.login.ResponseLogin
+import com.bimabagaskhoro.uigitstugas18.model.login.ResponseLogins
+import com.bimabagaskhoro.uigitstugas18.model.login.ResponseStatusLogin
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponseStatusPerson
 import okhttp3.MultipartBody
 import retrofit2.Call
@@ -84,11 +85,17 @@ interface Api {
             @Field("passwd") tittle: String,
             @Field("avatar") gambar: String,
             @Query("function") function: String
-    ): Call<ResponseLogin>
+    ): Call<ResponseStatusLogin>
 
     @Multipart
     @POST("apilogin.php?function=upload_avatar")
     fun uploadImage(
             @Part body: MultipartBody.Part
     ):Call<ResponseGambar>
+
+    @GET("apilogin.php?function=login_user")
+    fun login(
+            @Query("email") email_user: String,
+            @Query("passwd") password: String
+    ): Call<ResponseLogins>
 }

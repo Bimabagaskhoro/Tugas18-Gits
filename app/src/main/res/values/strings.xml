@@ -27,4 +27,8 @@
     <string name="orang">Orang</string>
     <string name="upload">Upload</string>
     <string name="url">avatar url :</string>
+    <string name="welcome_to_app">Welcome to app</string>
+    <string name="pengaturan">pengaturan</string>
+    <string name="logout">logout</string>
+    <string name="exit">Exit</string>
 </resources>

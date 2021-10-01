@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class ResponseLogin(
+data class ResponseStatusLogin(
 
 	@field:SerializedName("message")
 	val message: String? = null,

@@ -15,9 +15,8 @@ import android.widget.Toast
 import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityRegisterBinding
 import com.bimabagaskhoro.uigitstugas18.model.ResponseGambar
-import com.bimabagaskhoro.uigitstugas18.model.login.ResponseLogin
+import com.bimabagaskhoro.uigitstugas18.model.login.ResponseStatusLogin
 import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
-import com.bimabagaskhoro.uigitstugas18.ui.person.InsertPersonActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -88,10 +87,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                                        binding.editTextTextPassword.text.toString().trim(),
                                        file.name.toString().trim(),
                                        "insert_user")
-                                       .enqueue(object : Callback<ResponseLogin>{
-                                           override fun onResponse(call: Call<ResponseLogin>, response: Response<ResponseLogin>) {
-                                               if (response!!.isSuccessful){
-                                                   if (response.body()?.status == 1){
+                                       .enqueue(object : Callback<ResponseStatusLogin>{
+                                           override fun onResponse(call: Call<ResponseStatusLogin>, responseStatus: Response<ResponseStatusLogin>) {
+                                               if (responseStatus!!.isSuccessful){
+                                                   if (responseStatus.body()?.status == 1){
                                                        binding.edtName.setText("")
                                                        binding.editTextTextEmailAddress.setText("")
                                                        binding.editTextTextPassword.setText("")
@@ -103,7 +102,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                                                }
                                            }
 
-                                           override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
+                                           override fun onFailure(call: Call<ResponseStatusLogin>, t: Throwable) {
                                                Toast.makeText(this@RegisterActivity, "respon gagal $t", Toast.LENGTH_SHORT).show()
                                            }
 
@@ -121,9 +120,6 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
-            R.id.button_register -> {
-                Toast.makeText(this,"Registrasi Berhasil", Toast.LENGTH_SHORT).show()
-            }
             R.id.tv_login -> {
                 val tvLogin = Intent(this, LoginActivity::class.java)
                 startActivity(tvLogin)
@@ -140,7 +136,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
             cursor.moveToFirst()
             return cursor.getString(column_index)
         } catch (e: Exception) {
-            Log.e(ContentValues.TAG, "getPathFromURI Exception : ${e.toString()}")
+            Log.e(ContentValues.TAG, "Exception : ${e.toString()}")
             return ""
         } finally {
             cursor?.close()
