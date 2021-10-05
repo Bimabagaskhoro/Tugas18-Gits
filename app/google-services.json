@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "36368688887",
+    "project_id": "notifikasi-be4dc",
+    "storage_bucket": "notifikasi-be4dc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:36368688887:android:14b1c07eaf7f404f6095f2",
+        "android_client_info": {
+          "package_name": "com.bimabagaskhoro.uigitstugas18"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "36368688887-g43pe78ighas08l0sok39e2okb3qtvc3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzDHsG_iyZ-JXW2arFBmj1ma1FQJJggXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "36368688887-g43pe78ighas08l0sok39e2okb3qtvc3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

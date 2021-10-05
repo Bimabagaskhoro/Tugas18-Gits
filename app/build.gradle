@@ -2,7 +2,9 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-parcelize'
+    id 'com.google.gms.google-services'
 }
+
 
 android {
     compileSdkVersion 30
@@ -64,4 +66,7 @@ dependencies {
 
     implementation "com.airbnb.android:lottie:$lottie_version"
     implementation 'pub.devrel:easypermissions:2.0.1'
+
+    implementation 'com.google.firebase:firebase-messaging:22.0.0'
 }
+
