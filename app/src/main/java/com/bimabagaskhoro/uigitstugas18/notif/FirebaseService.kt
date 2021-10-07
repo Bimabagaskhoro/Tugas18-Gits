@@ -1,4 +1,4 @@
-package com.bimabagaskhoro.uigitstugas18
+package com.bimabagaskhoro.uigitstugas18.notif
 
 import android.annotation.SuppressLint
 import android.app.NotificationChannel
@@ -12,8 +12,11 @@ import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import com.bimabagaskhoro.uigitstugas18.MainActivity
+import com.bimabagaskhoro.uigitstugas18.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import org.json.JSONObject
 
 class FirebaseService : FirebaseMessagingService() {
 
@@ -40,13 +43,25 @@ class FirebaseService : FirebaseMessagingService() {
         val intent = Intent(this, MainActivity::class.java)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
 
-        val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_baseline_add_24)
-            .setAutoCancel(true)
-            .setContentIntent(pendingIntent)
-            .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
-            .setContentTitle(remoteMessage.notification?.title)
-            .setContentText(remoteMessage.notification?.body)
+        lateinit var builder: NotificationCompat.Builder
+        if (remoteMessage.data.isNullOrEmpty()) {
+            builder = NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_baseline_notifications_none_24)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                .setContentTitle(remoteMessage.notification?.title)
+                .setContentText(remoteMessage.notification?.body)
+        }else {
+            val data = JSONObject(remoteMessage.data.toString()).getJSONObject("data")
+            builder = NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.ic_baseline_notifications_none_24)
+                .setAutoCancel(true)
+                .setContentIntent(pendingIntent)
+                .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
+                .setContentTitle(data.getString("title"))
+                .setContentText(data.getString("message"))
+        }
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)

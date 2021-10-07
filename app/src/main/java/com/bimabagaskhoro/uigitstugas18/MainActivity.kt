@@ -9,6 +9,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityMainBinding
+import com.bimabagaskhoro.uigitstugas18.notif.PushNotifActivity
 import com.bimabagaskhoro.uigitstugas18.ui.buah.BuahActivity
 import com.bimabagaskhoro.uigitstugas18.ui.buah.UpdateActivity
 import com.bimabagaskhoro.uigitstugas18.ui.person.PersonActivity
@@ -50,6 +51,11 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.menu2 -> {
                 logout(sharedPref)
+                true
+            }
+            R.id.menu_notif -> {
+                val intent = Intent(this@MainActivity, PushNotifActivity::class.java)
+                startActivity(intent)
                 true
             }
             else -> true

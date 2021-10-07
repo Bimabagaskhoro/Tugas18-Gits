@@ -31,4 +31,7 @@
     <string name="pengaturan">pengaturan</string>
     <string name="logout">logout</string>
     <string name="exit">Exit</string>
+    <string name="send_notification">Send Notification</string>
+    <string name="message">Message</string>
+    <string name="addnotif">ADD NOTIF</string>
 </resources>

@@ -4,5 +4,7 @@
     <group android:menuCategory="container">
         <item android:id="@+id/menu2"
             android:title="@string/logout" />
+        <item android:id="@+id/menu_notif"
+            android:title="@string/send_notification" />
     </group>
 </menu>

@@ -1,6 +1,7 @@
 package com.bimabagaskhoro.uigitstugas18.rest
 
 import com.bimabagaskhoro.uigitstugas18.model.ResponseGambar
+import com.bimabagaskhoro.uigitstugas18.model.ResponseNotification
 import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseData
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponsePerson
 import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseStatus
@@ -8,7 +9,9 @@ import com.bimabagaskhoro.uigitstugas18.model.login.ResponseLogins
 import com.bimabagaskhoro.uigitstugas18.model.login.ResponseStatusLogin
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponseStatusPerson
 import okhttp3.MultipartBody
+import okhttp3.ResponseBody
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 interface Api {
@@ -98,4 +101,12 @@ interface Api {
             @Query("email") email_user: String,
             @Query("passwd") password: String
     ): Call<ResponseLogins>
+
+    @FormUrlEncoded
+    @POST("apilogin.php?function=send_notifikasi")
+    fun pushNotif(
+        @Field("title")tittle: String,
+        @Field("message")message: String
+    ): Call<ResponseNotification>
+
 }

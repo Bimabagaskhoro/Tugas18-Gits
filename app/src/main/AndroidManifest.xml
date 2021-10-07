@@ -14,11 +14,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UiGitsTugas18"
         android:usesCleartextTraffic="true">
+        <activity android:name=".notif.PushNotifActivity"/>
+
         <service
-            android:name=".FirebaseService"
+            android:name=".notif.FirebaseService"
             android:exported="false">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
 
