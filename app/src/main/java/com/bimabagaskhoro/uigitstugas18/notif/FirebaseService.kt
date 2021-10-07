@@ -11,9 +11,12 @@ import android.media.RingtoneManager
 import android.os.Build
 import android.os.IBinder
 import android.util.Log
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import com.bimabagaskhoro.uigitstugas18.MainActivity
 import com.bimabagaskhoro.uigitstugas18.R
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
 import org.json.JSONObject
@@ -24,7 +27,7 @@ class FirebaseService : FirebaseMessagingService() {
         private const val NOTIFICATION_ID = 1
         private const val CHANNEL_ID = "channel_formulir"
         private const val CHANNEL_NAME = "formulir channel"
-        private val TAG = FirebaseService::class.java.simpleName
+        val TAG = FirebaseService::class.java.simpleName
     }
 
     override fun onNewToken(token: String) {
@@ -54,6 +57,7 @@ class FirebaseService : FirebaseMessagingService() {
                 .setContentText(remoteMessage.notification?.body)
         }else {
             val data = JSONObject(remoteMessage.data.toString()).getJSONObject("data")
+           // Log.d(TAG,"data: $data")
             builder = NotificationCompat.Builder(this, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_baseline_notifications_none_24)
                 .setAutoCancel(true)

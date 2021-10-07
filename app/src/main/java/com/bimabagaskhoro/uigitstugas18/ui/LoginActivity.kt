@@ -7,13 +7,11 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import com.bimabagaskhoro.uigitstugas18.MainActivity
 import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityLoginBinding
 import com.bimabagaskhoro.uigitstugas18.model.login.ResponseLogins
 import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
-import com.bimabagaskhoro.uigitstugas18.ui.person.DetailPersonActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -74,6 +72,7 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
             }
 
         })
+
     }
 
     private fun session(name: String, email: String, password: String) {

@@ -34,4 +34,5 @@
     <string name="send_notification">Send Notification</string>
     <string name="message">Message</string>
     <string name="addnotif">ADD NOTIF</string>
+    <string name="welcome_to_the_app">Welcome To The App</string>
 </resources>

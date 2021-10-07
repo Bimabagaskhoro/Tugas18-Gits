@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UiGitsTugas18"
         android:usesCleartextTraffic="true">
-        <activity android:name=".notif.PushNotifActivity"/>
+        <activity android:name=".notif.PushNotifActivity" />
 
         <service
             android:name=".notif.FirebaseService"
@@ -33,8 +33,10 @@
         <activity android:name=".ui.buah.DetailActivity" />
         <activity android:name=".ui.buah.InsertActivity" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.LoginActivity">
+        <activity android:name=".ui.RegisterActivity"/>
+        <activity android:name=".ui.LoginActivity"/>
+        <activity android:name=".SplashScreen"
+            android:theme="@style/SplashScreenStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

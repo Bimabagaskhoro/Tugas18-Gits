@@ -9,9 +9,7 @@ import com.bimabagaskhoro.uigitstugas18.model.login.ResponseLogins
 import com.bimabagaskhoro.uigitstugas18.model.login.ResponseStatusLogin
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponseStatusPerson
 import okhttp3.MultipartBody
-import okhttp3.ResponseBody
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.*
 
 interface Api {
@@ -103,10 +101,12 @@ interface Api {
     ): Call<ResponseLogins>
 
     @FormUrlEncoded
-    @POST("apilogin.php?function=send_notifikasi")
+    @POST("notif.php?function=sendPushNotification")
     fun pushNotif(
+        @Field("fcm_token")ids: String,
         @Field("title")tittle: String,
-        @Field("message")message: String
+        @Field("message")message: String,
+        @Query("function") function: String
     ): Call<ResponseNotification>
 
 }
