@@ -4,16 +4,22 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="5dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginRight="5dp"
-    android:layout_marginBottom="5dp"
+    android:layout_marginLeft="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginRight="16dp"
+    android:layout_marginBottom="8dp"
     app:cardCornerRadius="15dp"
+    android:backgroundTint="@color/backgrounds"
     tools:ignore="MissingConstraints">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:background="@color/backgrounds"
         android:layout_gravity="center_horizontal"
         android:padding="8dp">
 
@@ -46,6 +52,7 @@
             android:layout_marginTop="8dp"
             android:textSize="14sp"
             android:textStyle="italic"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/tv_name_person"
             app:layout_constraintTop_toBottomOf="@+id/tv_name_person"
             tools:text="email" />
@@ -55,6 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="1" />
@@ -65,6 +73,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             tools:text="tittle"
+            android:textColor="@color/black"
             app:layout_constraintStart_toStartOf="@+id/tv_email_person"
             app:layout_constraintTop_toBottomOf="@+id/tv_email_person" />
 

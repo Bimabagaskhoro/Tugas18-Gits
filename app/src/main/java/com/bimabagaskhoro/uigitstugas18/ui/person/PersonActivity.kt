@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bimabagaskhoro.uigitstugas18.MainActivity
 import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.adapter.PersonAdapter
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityPersonBinding
@@ -20,7 +21,6 @@ import retrofit2.Response
 
 @Suppress("UNCHECKED_CAST")
 class PersonActivity : AppCompatActivity() {
-
     val personAdapter = PersonAdapter(arrayListOf())
     private lateinit var binding: ActivityPersonBinding
 
@@ -28,9 +28,6 @@ class PersonActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPersonBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        val actionbar = supportActionBar
-        actionbar!!.title = getString(R.string.person)
 
         binding.apply {
             rvItemPerson.layoutManager = LinearLayoutManager(this@PersonActivity)
@@ -41,7 +38,10 @@ class PersonActivity : AppCompatActivity() {
                 val intent = Intent(this@PersonActivity, InsertPersonActivity::class.java)
                 startActivity(intent)
             }
-
+            imgBack.setOnClickListener {
+                val intent = Intent(this@PersonActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

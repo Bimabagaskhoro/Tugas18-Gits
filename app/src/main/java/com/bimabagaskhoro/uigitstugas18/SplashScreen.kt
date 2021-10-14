@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.WindowManager
-import com.bimabagaskhoro.uigitstugas18.ui.LoginActivity
+import com.bimabagaskhoro.uigitstugas18.ui.user.LoginActivity
 
 @Suppress("DEPRECATION")
 class SplashScreen : AppCompatActivity() {

@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bimabagaskhoro.uigitstugas18.MainActivity
 import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.adapter.ItemAdapter
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityBuahBinding
@@ -28,9 +29,6 @@ class BuahActivity : AppCompatActivity() {
         binding = ActivityBuahBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val actionbar = supportActionBar
-        actionbar!!.title = getString(R.string.buah)
-
         binding.apply {
             rvItem.layoutManager = LinearLayoutManager(this@BuahActivity)
             rvItem.setHasFixedSize(true)
@@ -40,7 +38,10 @@ class BuahActivity : AppCompatActivity() {
                 val intent = Intent(this@BuahActivity, InsertActivity::class.java)
                 startActivity(intent)
             }
-
+            imgBack.setOnClickListener {
+                val intent = Intent(this@BuahActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 

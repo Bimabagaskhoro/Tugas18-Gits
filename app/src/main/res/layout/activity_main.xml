@@ -4,16 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <TextView
         android:id="@+id/tv_name_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:text="@string/welcome_to_app"
-        android:textSize="21sp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/dasboard"
+        android:textAllCaps="true"
+        android:textColor="@color/backgrounds"
+        android:textSize="24sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -21,15 +24,26 @@
         android:id="@+id/card_buah"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        app:cardCornerRadius="16dp"
         android:layout_marginStart="32dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="90dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/lottie">
-        <Button
-            android:id="@+id/btn_buah"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/ic_baseline_apple_24" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_main">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationFruits"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/backgrounds"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="fruits.json"
+            app:lottie_loop="true" />
+
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
@@ -37,53 +51,78 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginEnd="32dp"
+        app:cardCornerRadius="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/card_buah"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/card_buah">
 
-        <Button
-            android:id="@+id/btn_person"
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationPersons"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:background="@drawable/ic_baseline_person_24" />
+            android:background="@color/backgrounds"
+            android:layout_centerHorizontal="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="persons.json"
+            app:lottie_loop="true" />
     </androidx.cardview.widget.CardView>
 
-    <com.airbnb.lottie.LottieAnimationView
-        android:id="@+id/lottie"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView3"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_marginTop="32dp"
+        app:cardCornerRadius="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_name_main"
-        app:lottie_autoPlay="true"
-        app:lottie_fileName="searching.json"
-        app:lottie_loop="true" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/lottieAnimationView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/backgrounds"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_fileName="person.json"
+            app:lottie_loop="true" />
+    </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:text="@string/buah_buahan"
-        android:textColor="@color/black"
-        android:textAllCaps="true"
-        app:layout_constraintEnd_toEndOf="@+id/card_buah"
-        app:layout_constraintStart_toStartOf="@+id/card_buah"
-        app:layout_constraintTop_toBottomOf="@+id/card_buah" />
+        android:text="@string/_3_items"
+        android:textColor="@color/backgrounds"
+        app:layout_constraintStart_toStartOf="@+id/tv_name_main"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_main" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="@string/orang"
-        android:textColor="@color/black"
-        android:textAllCaps="true"
-        app:layout_constraintEnd_toEndOf="@+id/cardView2"
-        app:layout_constraintStart_toStartOf="@+id/cardView2"
-        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
+    <ImageView
+        android:id="@+id/img_notification"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/ic_baseline_notifications_none_24"
+        app:layout_constraintBottom_toBottomOf="@+id/img_logout"
+        app:layout_constraintEnd_toStartOf="@+id/img_logout"
+        app:layout_constraintTop_toTopOf="@+id/img_logout" />
+
+    <ImageView
+        android:id="@+id/img_logout"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/logout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

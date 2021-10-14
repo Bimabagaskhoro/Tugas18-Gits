@@ -14,8 +14,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UiGitsTugas18"
         android:usesCleartextTraffic="true">
-        <activity android:name=".notif.PushNotifActivity" />
-
         <service
             android:name=".notif.FirebaseService"
             android:exported="false">
@@ -23,19 +21,26 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
+        <activity android:name=".ui.user.UserActivity"
+            android:theme="@style/SplashScreenStyle"/>
+        <activity android:name=".ui.user.UpdateUser" />
+        <activity android:name=".notif.PushNotifActivity" />
         <activity android:name=".ui.person.UpdatePersonActivity" />
         <activity android:name=".ui.person.InsertPersonActivity" />
         <activity android:name=".ui.person.DetailPersonActivity" />
-        <activity android:name=".ui.person.PersonActivity" />
-        <activity android:name=".ui.buah.BuahActivity" />
+        <activity android:name=".ui.person.PersonActivity"
+            android:theme="@style/SplashScreenStyle"  />
+        <activity android:name=".ui.buah.BuahActivity"
+            android:theme="@style/SplashScreenStyle" />
         <activity android:name=".ui.buah.UpdateActivity" />
         <activity android:name=".ui.buah.DetailActivity" />
         <activity android:name=".ui.buah.InsertActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".ui.RegisterActivity"/>
-        <activity android:name=".ui.LoginActivity"/>
-        <activity android:name=".SplashScreen"
+        <activity android:name=".MainActivity"
+            android:theme="@style/SplashScreenStyle" />
+        <activity android:name=".ui.user.RegisterActivity" />
+        <activity android:name=".ui.user.LoginActivity" />
+        <activity
+            android:name=".SplashScreen"
             android:theme="@style/SplashScreenStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

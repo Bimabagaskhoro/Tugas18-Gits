@@ -5,6 +5,7 @@ import com.bimabagaskhoro.uigitstugas18.model.ResponseNotification
 import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseData
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponsePerson
 import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseStatus
+import com.bimabagaskhoro.uigitstugas18.model.login.DataItem
 import com.bimabagaskhoro.uigitstugas18.model.login.ResponseLogins
 import com.bimabagaskhoro.uigitstugas18.model.login.ResponseStatusLogin
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponseStatusPerson
@@ -96,10 +97,15 @@ interface Api {
 
     @GET("apilogin.php?function=login_user")
     fun login(
-            @Query("email") email_user: String,
-            @Query("passwd") password: String
+        @Query("email") email_user: String,
+        @Query("passwd") password: String
     ): Call<ResponseLogins>
 
+    @GET("apilogin.php?function=get_user")
+    fun getUser(): Call<ResponseLogins>
+
+
+    // notif
     @FormUrlEncoded
     @POST("notif.php?function=sendPushNotification")
     fun pushNotif(

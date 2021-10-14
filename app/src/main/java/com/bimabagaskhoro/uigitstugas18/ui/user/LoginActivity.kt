@@ -1,4 +1,4 @@
-package com.bimabagaskhoro.uigitstugas18.ui
+package com.bimabagaskhoro.uigitstugas18.ui.user
 
 import android.content.Context
 import android.content.Intent

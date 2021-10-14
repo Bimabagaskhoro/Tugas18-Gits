@@ -35,4 +35,12 @@
     <string name="message">Message</string>
     <string name="addnotif">ADD NOTIF</string>
     <string name="welcome_to_the_app">Welcome To The App</string>
+    <string name="add_auth">add auth</string>
+    <string name="updateusr">update</string>
+    <string name="dasboard">Dasboard</string>
+    <string name="pegawai">Pegawai</string>
+    <string name="user">user</string>
+    <string name="_3_items">3 Items</string>
+    <string name="kosong" />
+    <string name="_1">1</string>
 </resources>
