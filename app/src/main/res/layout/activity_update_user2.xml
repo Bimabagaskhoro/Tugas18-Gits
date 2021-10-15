@@ -1,21 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/update_act"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.user.UpdateUser">
-
-    <ImageView
-        android:id="@+id/imageView"
+    tools:context=".ui.user.UpdateUserActivity">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_update_user_lg"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_baseline_person_24" />
+        android:src="@mipmap/ic_launcher_round"/>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_upload"
@@ -24,29 +22,29 @@
         android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
         android:src="@drawable/ic_baseline_add_24"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintStart_toEndOf="@+id/imageView"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/img_update_user_lg"
+        app:layout_constraintEnd_toEndOf="@+id/img_update_user_lg"
+        app:layout_constraintStart_toEndOf="@+id/img_update_user_lg"
+        app:layout_constraintTop_toBottomOf="@+id/img_update_user_lg" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tv_name_update_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/fab_upload"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
+        app:layout_constraintTop_toTopOf="@+id/img_update_user_lg"
         tools:text="name" />
 
     <TextView
-        android:id="@+id/textView6"
+        android:id="@+id/tv_email_update_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         tools:text="Email2gmail.com"
-        app:layout_constraintStart_toStartOf="@+id/textView5"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintStart_toStartOf="@+id/tv_name_update_user"
+        app:layout_constraintTop_toBottomOf="@+id/tv_name_update_user" />
 
     <Button
         android:id="@+id/button2"
@@ -55,7 +53,7 @@
         android:layout_marginEnd="32dp"
         android:background="@drawable/ic_baseline_fingerprint_24"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView" />
+        app:layout_constraintTop_toTopOf="@+id/img_update_user_lg" />
 
     <TextView
         android:id="@+id/textView7"
@@ -72,12 +70,13 @@
         android:id="@+id/tv_id_update_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1"
+        android:textColor="@color/white"
+        android:text="@string/_1"
         app:layout_constraintBottom_toTopOf="@+id/button2"
         app:layout_constraintEnd_toEndOf="@+id/button2" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tvfield1"
+        android:id="@+id/tvfields"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -89,7 +88,27 @@
         app:layout_constraintTop_toBottomOf="@+id/fab_upload">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_name"
+            android:id="@+id/edt_id_update_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="@string/id" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tvfield1"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvfields">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_name_update_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -107,7 +126,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvfield1">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextTextEmailAddress"
+            android:id="@+id/editTextTextEmailAddress_update_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -126,7 +145,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tvfield2">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/editTextTextPassword_update_user"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
@@ -145,14 +164,4 @@
         app:layout_constraintEnd_toEndOf="@+id/tvfield3"
         app:layout_constraintStart_toStartOf="@+id/tvfield3"
         app:layout_constraintTop_toBottomOf="@+id/tvfield3" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="?android:attr/progressBarStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

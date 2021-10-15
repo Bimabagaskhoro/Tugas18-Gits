@@ -10,15 +10,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.widget.ImageView
 import android.widget.Toast
 import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityUpdatePersonBinding
 import com.bimabagaskhoro.uigitstugas18.model.ResponseGambar
+import com.bimabagaskhoro.uigitstugas18.model.person.DataItemPerson
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponseStatusPerson
 import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
+import com.bumptech.glide.Glide
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import pub.devrel.easypermissions.EasyPermissions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -28,10 +32,12 @@ import java.io.File
 class UpdatePersonActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityUpdatePersonBinding
-
     private var imageUri: Uri? = null
+    private var imageName: String? = ""
     companion object{
         private const val REQUEST_CODE_IMAGE_PICKER = 100
+        const val EXTRA_DATA = "extra_data"
+        const val EXTRA_LINK = "http://192.168.43.225/tugasGitsApi/uploadgambar/"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,20 +60,36 @@ class UpdatePersonActivity : AppCompatActivity() {
         val name = intent.getStringExtra("nama")
         val email = intent.getStringExtra("email")
         val tittle = intent.getStringExtra("tittle")
-        val gambar = intent.getStringExtra("gambar")
         binding.apply {
             edtIdPersonUpdate.setText(id)
             edtNamePersonUpdate.setText(name)
             edtEmailPersonUpdate.setText(email)
             edtTittlePersonUpdate.setText(tittle)
-            tvAvatar.setText(gambar)
         }
+
+        getData()
+    }
+
+    private fun getData() {
+        val imgPath: ImageView = findViewById(R.id.img_update)
+        val item = intent.getParcelableExtra<DataItemPerson>(EXTRA_DATA) as DataItemPerson
+        Glide.with(this)
+            .load(EXTRA_LINK +item.gambar)
+            .into(imgPath)
     }
 
     private fun pickImage() {
-        Intent(Intent.ACTION_PICK).also{
-            it.type = "image/*"
-            startActivityForResult(it, REQUEST_CODE_IMAGE_PICKER)
+        if(EasyPermissions.hasPermissions(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)){
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, REQUEST_CODE_IMAGE_PICKER)
+        }else{
+            // Menampilkan permission request saat belum mendapat permission dari user
+            EasyPermissions.requestPermissions(
+                this,
+                "This application need your permission to access photo gallery.",
+                991,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE)
         }
     }
 
@@ -89,10 +111,11 @@ class UpdatePersonActivity : AppCompatActivity() {
     private fun insertData(imageUri: Uri) {
         val filePath = getPathFromURI(this, imageUri)
         val file = File(filePath)
+        imageName = file.name
         val mFile = RequestBody.create("multipart".toMediaTypeOrNull(), file)
-        val body: MultipartBody.Part = MultipartBody.Part.createFormData("file", file.name, mFile)
+        val body: MultipartBody.Part = MultipartBody.Part.createFormData("file", imageName, mFile)
 
-        RetrofitClient().apiInstance().insertGambar(body)
+        RetrofitClient().apiInstance().uploadImage(body)
                 .enqueue(object : Callback<ResponseGambar>{
                     override fun onResponse(call: Call<ResponseGambar>, response: Response<ResponseGambar>) {
                         if (response!!.isSuccessful){
@@ -101,7 +124,7 @@ class UpdatePersonActivity : AppCompatActivity() {
                                         binding.edtNamePersonUpdate.text.toString().trim(),
                                         binding.edtEmailPersonUpdate.text.toString().trim(),
                                         binding.edtTittlePersonUpdate.text.toString().trim(),
-                                        file.name.toString().trim(),
+                                        imageName.toString().trim(),
                                         binding.edtIdPersonUpdate.text.toString().trim(),
                                 ).enqueue(object : Callback<ResponseStatusPerson>{
                                     override fun onResponse(call: Call<ResponseStatusPerson>, response: Response<ResponseStatusPerson>) {

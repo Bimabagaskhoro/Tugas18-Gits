@@ -17,9 +17,11 @@ import com.bimabagaskhoro.uigitstugas18.databinding.ActivityRegisterBinding
 import com.bimabagaskhoro.uigitstugas18.model.ResponseGambar
 import com.bimabagaskhoro.uigitstugas18.model.login.ResponseStatusLogin
 import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
+import com.bimabagaskhoro.uigitstugas18.ui.person.InsertPersonActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import pub.devrel.easypermissions.EasyPermissions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +32,7 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityRegisterBinding
     private var imageUri: Uri? = null
+    private var imageName: String? = ""
     companion object{
         private const val REQUEST_CODE_IMAGE_PICKER = 100
     }
@@ -48,9 +51,17 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     private fun pickImage() {
-        Intent(Intent.ACTION_PICK).also{
-            it.type = "image/*"
-            startActivityForResult(it, REQUEST_CODE_IMAGE_PICKER)
+        if(EasyPermissions.hasPermissions(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)){
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, REQUEST_CODE_IMAGE_PICKER)
+        }else{
+            // Menampilkan permission request saat belum mendapat permission dari user
+            EasyPermissions.requestPermissions(
+                this,
+                "This application need your permission to access photo gallery.",
+                991,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE)
         }
     }
 
@@ -73,7 +84,8 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
         val filePath = getPathFromURI(this, imageUri)
         val file = File(filePath)
         val mFile = RequestBody.create("multipart".toMediaTypeOrNull(), file)
-        val body: MultipartBody.Part = MultipartBody.Part.createFormData("file", file.name, mFile)
+        imageName = file.name
+        val body: MultipartBody.Part = MultipartBody.Part.createFormData("file", imageName, mFile)
 
         RetrofitClient().apiInstance().uploadImage(body)
                 .enqueue(object : Callback<ResponseGambar>{
@@ -82,10 +94,10 @@ class RegisterActivity : AppCompatActivity(), View.OnClickListener {
                            if (response.body()?.status == 1){
                                RetrofitClient().apiInstance().regist(
                                        "",
-                                       binding.edtName.text.toString().trim(),
-                                       binding.editTextTextEmailAddress.text.toString().trim(),
-                                       binding.editTextTextPassword.text.toString().trim(),
-                                       file.name.toString().trim(),
+                                        binding.edtName.text.toString().trim(),
+                                        binding.editTextTextEmailAddress.text.toString().trim(),
+                                        binding.editTextTextPassword.text.toString().trim(),
+                                        imageName.toString().trim(),
                                        "insert_user")
                                        .enqueue(object : Callback<ResponseStatusLogin>{
                                            override fun onResponse(call: Call<ResponseStatusLogin>, responseStatus: Response<ResponseStatusLogin>) {

@@ -70,10 +70,11 @@ interface Api {
             @Query("id")id: String,
     ):Call<ResponseStatusPerson>
 
+    // upload gambar
     @Multipart
-    @POST("apiperson.php?function=upload_gambar")
-    fun insertGambar(
-            @Part body: MultipartBody.Part
+    @POST("upload.php?function=upload_gambar")
+    fun uploadImage(
+        @Part body: MultipartBody.Part
     ):Call<ResponseGambar>
 
     //login
@@ -89,11 +90,6 @@ interface Api {
             @Query("function") function: String
     ): Call<ResponseStatusLogin>
 
-    @Multipart
-    @POST("apilogin.php?function=upload_avatar")
-    fun uploadImage(
-            @Part body: MultipartBody.Part
-    ):Call<ResponseGambar>
 
     @GET("apilogin.php?function=login_user")
     fun login(
@@ -104,6 +100,15 @@ interface Api {
     @GET("apilogin.php?function=get_user")
     fun getUser(): Call<ResponseLogins>
 
+    @FormUrlEncoded
+    @POST("apilogin.php?function=update_user")
+    fun updateUser(
+        @Field("nama") nama: String,
+        @Field("email") email: String,
+        @Field("passwd") password: String,
+        @Field("avatar") gambar: String,
+        @Query("id")id: String
+    ): Call<ResponseStatusLogin>
 
     // notif
     @FormUrlEncoded

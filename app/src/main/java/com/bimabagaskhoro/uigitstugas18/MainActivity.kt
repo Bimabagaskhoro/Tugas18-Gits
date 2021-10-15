@@ -5,14 +5,11 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.Toast
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityMainBinding
 import com.bimabagaskhoro.uigitstugas18.notif.PushNotifActivity
 import com.bimabagaskhoro.uigitstugas18.ui.buah.BuahActivity
 import com.bimabagaskhoro.uigitstugas18.ui.person.PersonActivity
-import com.bimabagaskhoro.uigitstugas18.ui.user.UpdateUser
 import com.bimabagaskhoro.uigitstugas18.ui.user.UserActivity
 
 @Suppress("UNCHECKED_CAST")

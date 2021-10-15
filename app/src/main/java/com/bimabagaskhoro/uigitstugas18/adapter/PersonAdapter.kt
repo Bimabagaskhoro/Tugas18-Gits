@@ -60,6 +60,7 @@ class PersonAdapter(private val listItem: ArrayList<DataItemPerson> ):
                     intent.putExtra("email",item.email)
                     intent.putExtra("tittle",item.tittle)
                     intent.putExtra("gambar",item.gambar)
+                    intent.putExtra(UpdatePersonActivity.EXTRA_DATA,item)
                     btnUpdatePerson.context.startActivity(intent)
                 }
                 btnDeletedPerson.setOnClickListener{

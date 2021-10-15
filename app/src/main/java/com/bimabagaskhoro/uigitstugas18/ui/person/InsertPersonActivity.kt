@@ -29,6 +29,7 @@ import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.MultipartBody.Part.Companion.createFormData
 import okhttp3.RequestBody
+import pub.devrel.easypermissions.EasyPermissions
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -39,6 +40,7 @@ class InsertPersonActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityInsertPersonBinding
     private var imageUri: Uri? = null
+    private var imageName: String? = ""
     companion object{
         private const val REQUEST_CODE_IMAGE_PICKER = 100
     }
@@ -61,9 +63,17 @@ class InsertPersonActivity : AppCompatActivity() {
     }
 
     private fun pickImage() {
-        Intent(Intent.ACTION_PICK).also{
-            it.type = "image/*"
-            startActivityForResult(it, REQUEST_CODE_IMAGE_PICKER)
+        if(EasyPermissions.hasPermissions(this,android.Manifest.permission.READ_EXTERNAL_STORAGE)){
+            val intent = Intent(Intent.ACTION_PICK)
+            intent.type = "image/*"
+            startActivityForResult(intent, REQUEST_CODE_IMAGE_PICKER)
+        }else{
+            // Menampilkan permission request saat belum mendapat permission dari user
+            EasyPermissions.requestPermissions(
+                this,
+                "This application need your permission to access photo gallery.",
+                991,
+                android.Manifest.permission.READ_EXTERNAL_STORAGE)
         }
     }
 
@@ -86,9 +96,10 @@ class InsertPersonActivity : AppCompatActivity() {
         val filePath = getPathFromURI(this, contentURI)
         val file = File(filePath)
         val mFile = RequestBody.create("multipart".toMediaTypeOrNull(), file)
-        val body: MultipartBody.Part = createFormData("file", file.name, mFile)
+        imageName = file.name
+        val body: MultipartBody.Part = createFormData("file", imageName, mFile)
 
-        RetrofitClient().apiInstance().insertGambar(body)
+        RetrofitClient().apiInstance().uploadImage(body)
                 .enqueue(object : Callback<ResponseGambar>{
                     override fun onResponse(call: Call<ResponseGambar>, response: Response<ResponseGambar>) {
                         if (response!!.isSuccessful){
@@ -98,7 +109,7 @@ class InsertPersonActivity : AppCompatActivity() {
                                         binding.edtNamePerson.text.toString().trim(),
                                         binding.edtEmailPerson.text.toString().trim(),
                                         binding.edtTittlePerson.text.toString().trim(),
-                                        file.name.toString().trim(),
+                                        imageName.toString().trim(),
                                         "insert_person"
                                 ).enqueue(object : Callback<ResponseStatusPerson>{
                                     override fun onResponse(call: Call<ResponseStatusPerson>, response: Response<ResponseStatusPerson>) {
