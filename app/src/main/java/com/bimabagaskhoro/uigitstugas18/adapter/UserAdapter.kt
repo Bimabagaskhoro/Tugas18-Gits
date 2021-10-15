@@ -55,6 +55,7 @@ class UserAdapter(private val listItem: ArrayList<DataItem>):
                     intent.putExtra("email",item.email)
                     intent.putExtra("passwd",item.passwd)
                     intent.putExtra("avatar",item.avatar)
+                    intent.putExtra("id_device",item.idDevice)
                     intent.putExtra(UpdateUserActivity.EXTRA_DATA,item)
                     btnUpdateUser.context.startActivity(intent)
                 }

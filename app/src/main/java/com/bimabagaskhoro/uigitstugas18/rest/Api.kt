@@ -110,6 +110,20 @@ interface Api {
         @Query("id")id: String
     ): Call<ResponseStatusLogin>
 
+    //login biometric
+    @FormUrlEncoded
+    @POST("apilogin.php?function=login_auth")
+    fun loginAuth(
+        @Field("id_device") deviceId: String
+    ): Call<ResponseGambar>
+
+    @FormUrlEncoded
+    @POST("apilogin.php?function=update_id_device")
+    fun updateDeviceId(
+        @Field("id_device") deviceId: String,
+        @Field("id") id: String
+    ): Call<ResponseGambar>
+
     // notif
     @FormUrlEncoded
     @POST("notif.php?function=sendPushNotification")

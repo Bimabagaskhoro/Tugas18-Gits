@@ -33,5 +33,8 @@ data class DataItem(
 	val avatar: String? = null,
 
 	@field:SerializedName("email")
-	val email: String? = null
+	val email: String? = null,
+
+	@field:SerializedName("id_device")
+	val idDevice: String? = null
 ) : Parcelable

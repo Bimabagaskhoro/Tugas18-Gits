@@ -46,12 +46,21 @@
         app:layout_constraintStart_toStartOf="@+id/tv_name_update_user"
         app:layout_constraintTop_toBottomOf="@+id/tv_name_update_user" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="50dp"
+    <TextView
+        android:id="@+id/tv_id_device"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:background="@drawable/ic_baseline_fingerprint_24"
+        android:text="@string/id_device"
+        app:layout_constraintEnd_toEndOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/button_login_biometric"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:src="@mipmap/ic_fingerprint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/img_update_user_lg" />
 
@@ -62,9 +71,9 @@
         android:layout_marginTop="8dp"
         android:text="@string/add_auth"
         android:textSize="9sp"
-        app:layout_constraintEnd_toEndOf="@+id/button2"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2" />
+        app:layout_constraintEnd_toEndOf="@+id/button_login_biometric"
+        app:layout_constraintStart_toStartOf="@+id/button_login_biometric"
+        app:layout_constraintTop_toBottomOf="@+id/button_login_biometric" />
 
     <TextView
         android:id="@+id/tv_id_update_user"
@@ -72,8 +81,8 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:text="@string/_1"
-        app:layout_constraintBottom_toTopOf="@+id/button2"
-        app:layout_constraintEnd_toEndOf="@+id/button2" />
+        app:layout_constraintBottom_toTopOf="@+id/button_login_biometric"
+        app:layout_constraintEnd_toEndOf="@+id/button_login_biometric" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tvfields"

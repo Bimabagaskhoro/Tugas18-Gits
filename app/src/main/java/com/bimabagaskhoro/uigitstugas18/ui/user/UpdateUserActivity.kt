@@ -1,5 +1,6 @@
 package com.bimabagaskhoro.uigitstugas18.ui.user
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.ContentValues
 import android.content.Context
@@ -9,6 +10,7 @@ import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
@@ -48,20 +50,24 @@ class UpdateUserActivity : AppCompatActivity() {
 
         val actionbar = supportActionBar
         actionbar!!.title = getString(R.string.update)
-
         val intent = intent
         val idUser = intent.getStringExtra("id")
         val name = intent.getStringExtra("nama")
         val email = intent.getStringExtra("email")
         val passwd = intent.getStringExtra("passwd")
+        val idDevice = intent.getStringExtra("id_device")
         binding.apply {
             edtIdUpdateUser.setText(idUser)
             edtNameUpdateUser.setText(name)
             editTextTextEmailAddressUpdateUser.setText(email)
             editTextTextPasswordUpdateUser.setText(passwd)
+            tvIdDevice.text = idDevice
             getData()
             fabUpload.setOnClickListener{
                 pickImage()
+            }
+            buttonLoginBiometric.setOnClickListener {
+                addBiometric()
             }
         }
     }
@@ -182,5 +188,34 @@ class UpdateUserActivity : AppCompatActivity() {
             cursor?.close()
         }
     }
+
+
+    @SuppressLint("HardwareIds", "SetTextI18n")
+    private fun addBiometric() {
+        val edtId: EditText = findViewById(R.id.edt_id_update_user)
+        val idDevice: String = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+        val textView: TextView = findViewById(R.id.tv_id_device)
+        textView.text = idDevice
+        RetrofitClient().apiInstance().updateDeviceId(
+            idDevice,
+            edtId.text.toString().trim(),
+        ).enqueue(object : Callback<ResponseGambar>{
+            override fun onResponse(
+                call: Call<ResponseGambar>,
+                response: Response<ResponseGambar>,
+            ) {
+                if (response!!.isSuccessful) {
+                    Toast.makeText(this@UpdateUserActivity, " update sukses", Toast.LENGTH_SHORT).show()
+                    finish()
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseGambar>, t: Throwable) {
+                Toast.makeText(this@UpdateUserActivity, "update id gagal", Toast.LENGTH_SHORT).show()
+            }
+
+        })
+    }
+
 
 }

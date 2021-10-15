@@ -29,7 +29,6 @@
         <activity
             android:name=".ui.user.UserActivity"
             android:theme="@style/SplashScreenStyle" />
-        <activity android:name=".ui.user.UpdateUser" />
         <activity android:name=".notif.PushNotifActivity" />
         <activity android:name=".ui.person.UpdatePersonActivity" />
         <activity android:name=".ui.person.InsertPersonActivity" />

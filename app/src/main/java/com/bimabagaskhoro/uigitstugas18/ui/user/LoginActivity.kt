@@ -1,25 +1,35 @@
 package com.bimabagaskhoro.uigitstugas18.ui.user
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import android.widget.Toast
+import androidx.biometric.BiometricPrompt
+import androidx.core.content.ContextCompat
 import com.bimabagaskhoro.uigitstugas18.MainActivity
 import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityLoginBinding
+import com.bimabagaskhoro.uigitstugas18.model.ResponseGambar
 import com.bimabagaskhoro.uigitstugas18.model.login.ResponseLogins
 import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
+import com.bimabagaskhoro.uigitstugas18.ui.person.InsertPersonActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.concurrent.Executor
 
-class LoginActivity : AppCompatActivity() , View.OnClickListener{
+class LoginActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityLoginBinding
     private lateinit var sharedPref: SharedPreferences
+    private lateinit var executor: Executor
+    private lateinit var biometricPrompt: BiometricPrompt
+    private lateinit var promptInfo: BiometricPrompt.PromptInfo
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +41,41 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
             buttonLogin.setOnClickListener{
                 login()
             }
-            tvCreateAccount.setOnClickListener(this@LoginActivity)
+            tvCreateAccount.setOnClickListener {
+                val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
+                startActivity(intent)
+            }
+
+            executor = ContextCompat.getMainExecutor(this@LoginActivity)
+
+            biometricPrompt = BiometricPrompt(this@LoginActivity, executor,
+                object : BiometricPrompt.AuthenticationCallback(){
+                    override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                        super.onAuthenticationError(errorCode, errString)
+                        Toast.makeText(this@LoginActivity, "Authentication Error: $errString", Toast.LENGTH_SHORT).show()
+                    }
+
+                    @SuppressLint("HardwareIds")
+                    override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                        super.onAuthenticationSucceeded(result)
+                        val idDevice: String = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
+                        loginBiometric(idDevice)
+                    }
+
+                    override fun onAuthenticationFailed() {
+                        super.onAuthenticationFailed()
+                        Toast.makeText(this@LoginActivity, "Authentication Failed", Toast.LENGTH_SHORT).show()
+                    }
+                })
+            promptInfo = BiometricPrompt.PromptInfo.Builder()
+                .setTitle("Login with fingerprint")
+                .setSubtitle("Please tap your finger!")
+                .setNegativeButtonText("Use Account password")
+                .build()
+
+            buttonLoginBiometric.setOnClickListener {
+                biometricPrompt.authenticate(promptInfo)
+            }
         }
     }
 
@@ -85,16 +129,31 @@ class LoginActivity : AppCompatActivity() , View.OnClickListener{
     }
 
 
-    override fun onClick(view: View) {
-        when (view.id) {
-            R.id.button_login -> {
-                val btnLogin = Intent(this, MainActivity::class.java)
-                startActivity(btnLogin)
+
+    private fun loginBiometric(idDevice : String) {
+        RetrofitClient().apiInstance().loginAuth(
+            idDevice
+        ).enqueue(object : Callback<ResponseGambar>{
+            override fun onResponse(
+                call: Call<ResponseGambar>,
+                response: Response<ResponseGambar>,
+            ) {
+                Toast.makeText(this@LoginActivity, "Respon sukses", Toast.LENGTH_SHORT).show()
+
+//                val name = response.body()?.data?.get(0)?.nama.toString()
+//                val email = response.body()?.data?.get(0)?.email.toString()
+//                val password = response.body()?.data?.get(0)?.passwd.toString()
+//
+//                session(name, email, password)
+                val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                startActivity(intent)
             }
-            R.id.tv_create_account -> {
-                val regist = Intent(this, RegisterActivity::class.java)
-                startActivity(regist)
+
+            override fun onFailure(call: Call<ResponseGambar>, t: Throwable) {
+                Toast.makeText(this@LoginActivity, "Respon gagal", Toast.LENGTH_SHORT).show()
             }
-        }
+
+        })
     }
+
 }

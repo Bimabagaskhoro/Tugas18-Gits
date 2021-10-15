@@ -16,7 +16,7 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="name">Name</string>
-    <string name="creat_account">Create Account</string>
+    <string name="creat_account">Create Account ?</string>
     <string name="empty">EMPTY</string>
     <string name="buah">BUAH</string>
     <string name="person">PERSON</string>
@@ -43,4 +43,6 @@
     <string name="_3_items">3 Items</string>
     <string name="kosong" />
     <string name="_1">1</string>
+    <string name="or_login_with_finger_print">or login with fingerprint</string>
+    <string name="id_device">id device</string>
 </resources>
