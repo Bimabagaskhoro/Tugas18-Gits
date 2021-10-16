@@ -6,6 +6,7 @@ import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseData
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponsePerson
 import com.bimabagaskhoro.uigitstugas18.model.buah.ResponseStatus
 import com.bimabagaskhoro.uigitstugas18.model.login.DataItem
+import com.bimabagaskhoro.uigitstugas18.model.login.ResponseBiometric
 import com.bimabagaskhoro.uigitstugas18.model.login.ResponseLogins
 import com.bimabagaskhoro.uigitstugas18.model.login.ResponseStatusLogin
 import com.bimabagaskhoro.uigitstugas18.model.person.ResponseStatusPerson
@@ -112,16 +113,18 @@ interface Api {
 
     //login biometric
     @FormUrlEncoded
-    @POST("apilogin.php?function=login_auth")
+    @POST("apilogin.php?function=login_auth_id_device")
     fun loginAuth(
-        @Field("id_device") deviceId: String
-    ): Call<ResponseGambar>
+        @Field("id_device") deviceId: String,
+        @Query("function") function: String
+    ): Call<ResponseBiometric>
 
     @FormUrlEncoded
     @POST("apilogin.php?function=update_id_device")
     fun updateDeviceId(
         @Field("id_device") deviceId: String,
-        @Field("id") id: String
+        @Field("id") id: String,
+        @Query("function") function: String
     ): Call<ResponseGambar>
 
     // notif

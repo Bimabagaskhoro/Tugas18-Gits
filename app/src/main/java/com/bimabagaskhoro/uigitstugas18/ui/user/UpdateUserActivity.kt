@@ -199,13 +199,14 @@ class UpdateUserActivity : AppCompatActivity() {
         RetrofitClient().apiInstance().updateDeviceId(
             idDevice,
             edtId.text.toString().trim(),
+            "update_id_device"
         ).enqueue(object : Callback<ResponseGambar>{
             override fun onResponse(
                 call: Call<ResponseGambar>,
                 response: Response<ResponseGambar>,
             ) {
-                if (response!!.isSuccessful) {
-                    Toast.makeText(this@UpdateUserActivity, " update sukses", Toast.LENGTH_SHORT).show()
+                if (response.isSuccessful) {
+                    Toast.makeText(this@UpdateUserActivity, "update di berhasil", Toast.LENGTH_SHORT).show()
                     finish()
                 }
             }

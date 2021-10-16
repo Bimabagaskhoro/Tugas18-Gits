@@ -15,6 +15,7 @@ import com.bimabagaskhoro.uigitstugas18.MainActivity
 import com.bimabagaskhoro.uigitstugas18.R
 import com.bimabagaskhoro.uigitstugas18.databinding.ActivityLoginBinding
 import com.bimabagaskhoro.uigitstugas18.model.ResponseGambar
+import com.bimabagaskhoro.uigitstugas18.model.login.ResponseBiometric
 import com.bimabagaskhoro.uigitstugas18.model.login.ResponseLogins
 import com.bimabagaskhoro.uigitstugas18.rest.RetrofitClient
 import com.bimabagaskhoro.uigitstugas18.ui.person.InsertPersonActivity
@@ -30,7 +31,9 @@ class LoginActivity : AppCompatActivity(){
     private lateinit var executor: Executor
     private lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
+    private lateinit var deviceId: String
 
+    @SuppressLint("HardwareIds")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
@@ -47,7 +50,7 @@ class LoginActivity : AppCompatActivity(){
             }
 
             executor = ContextCompat.getMainExecutor(this@LoginActivity)
-
+            deviceId = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
             biometricPrompt = BiometricPrompt(this@LoginActivity, executor,
                 object : BiometricPrompt.AuthenticationCallback(){
                     override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
@@ -58,8 +61,8 @@ class LoginActivity : AppCompatActivity(){
                     @SuppressLint("HardwareIds")
                     override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
                         super.onAuthenticationSucceeded(result)
-                        val idDevice: String = Settings.Secure.getString(contentResolver, Settings.Secure.ANDROID_ID)
-                        loginBiometric(idDevice)
+                        Toast.makeText(this@LoginActivity, "Authentication Success", Toast.LENGTH_SHORT).show()
+                        loginBiometric()
                     }
 
                     override fun onAuthenticationFailed() {
@@ -119,6 +122,38 @@ class LoginActivity : AppCompatActivity(){
 
     }
 
+    @SuppressLint("HardwareIds")
+    private fun loginBiometric() {
+        RetrofitClient().apiInstance().loginAuth(
+            deviceId,
+            "login_auth_id_device"
+        )
+            .enqueue(object : Callback<ResponseBiometric>{
+                override fun onResponse(
+                    call: Call<ResponseBiometric>,
+                    response: Response<ResponseBiometric>,
+                ) {
+                    if (response!!.isSuccessful){
+                        if (response.body()?.status == 1){
+                            Toast.makeText(this@LoginActivity, "Respon sukses", Toast.LENGTH_SHORT).show()
+                            val name = response.body()?.data?.get(0)?.nama.toString()
+                            val email = response.body()?.data?.get(0)?.email.toString()
+                            val password = response.body()?.data?.get(0)?.passwd.toString()
+
+                            session(name, email, password)
+                            val intent = Intent(this@LoginActivity, MainActivity::class.java)
+                            startActivity(intent)
+                            }
+                        }
+                }
+
+                override fun onFailure(call: Call<ResponseBiometric>, t: Throwable) {
+                    Toast.makeText(this@LoginActivity, "Respon gagal", Toast.LENGTH_SHORT).show()
+                }
+
+            })
+    }
+
     private fun session(name: String, email: String, password: String) {
         val editor = sharedPref.edit()
         editor.putBoolean("IS_LOGIN", true)
@@ -127,33 +162,4 @@ class LoginActivity : AppCompatActivity(){
         editor.putString("PASSWORD", password)
         editor.apply()
     }
-
-
-
-    private fun loginBiometric(idDevice : String) {
-        RetrofitClient().apiInstance().loginAuth(
-            idDevice
-        ).enqueue(object : Callback<ResponseGambar>{
-            override fun onResponse(
-                call: Call<ResponseGambar>,
-                response: Response<ResponseGambar>,
-            ) {
-                Toast.makeText(this@LoginActivity, "Respon sukses", Toast.LENGTH_SHORT).show()
-
-//                val name = response.body()?.data?.get(0)?.nama.toString()
-//                val email = response.body()?.data?.get(0)?.email.toString()
-//                val password = response.body()?.data?.get(0)?.passwd.toString()
-//
-//                session(name, email, password)
-                val intent = Intent(this@LoginActivity, MainActivity::class.java)
-                startActivity(intent)
-            }
-
-            override fun onFailure(call: Call<ResponseGambar>, t: Throwable) {
-                Toast.makeText(this@LoginActivity, "Respon gagal", Toast.LENGTH_SHORT).show()
-            }
-
-        })
-    }
-
 }
